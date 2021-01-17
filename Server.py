@@ -8,7 +8,7 @@ import praw # pip3 install praw
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer # make sure you have sklearn
 from flask import request
-
+from textblob import TextBlob
 app = Flask(__name__)
 
 """
@@ -24,7 +24,16 @@ To Do List:
 
 """
 
-
+def SentimentAnalysis(ListOfHeadlines):
+    SentimentListPolarity = []
+    SentimentListSubjectivity = []
+    # Parse headlines and make lists for polarity and subjectivity for each headline(in order)
+    for Headline in ListOfHeadlines:
+        TextBlobObjHeadline = TextBlob(Headline)
+        SentimentListPolarity.append(TextBlobObjHeadline.sentiment.polarity)
+        SentimentListSubjectivity.append(TextBlobObjHeadline.sentiment.subjectivity)
+    
+    return SentimentListPolarity, SentimentListSubjectivity
 
 def MLInferences(ListOfHeadlines,Vectorizer):
     """
@@ -143,7 +152,8 @@ def homepage(cat="hot",q=None):
     
     # Get a usable vectorizer to pass the inferencing/prediction stage
     Vectorizer = GetVectorizer()
-    
+    # Get lists from sentiment analysis(polarity and subjectivity)
+    SentimentListPolarity, SentimentListSubjectivity = SentimentAnalysis(RawHeadlines)
     # Get the list of fake/real news classifcation for the headlines you pass in
     FakeRealLabels = MLInferences(RawHeadlines, Vectorizer)
     
@@ -158,7 +168,7 @@ def homepage(cat="hot",q=None):
     return ResultHTML
     '''
 
-    return render_template('index.html', rhels=RawHeadlines, pabels=FakeRealLabels, links=links, cat=cat, q=q)
+    return render_template('index.html', rhels=RawHeadlines, pabels=FakeRealLabels, links=links, cat=cat, q=q, polars=SentimentListPolarity, sentis=SentimentListSubjectivity)
 
 @app.route("/search/", methods=['GET', 'POST'])
 def search():

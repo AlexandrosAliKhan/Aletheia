@@ -1,4 +1,5 @@
 @font-face { font-family: IBMPlexSans; src: url("https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Medium-c4b185e25a4dde85a29f902cd5ce5360.woff2") format("woff2"), url("https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Medium-1051a531d3e1ee3483a6533158557139.woff") format("woff"); font-style: normal; font-weight: 500; }
+@font-face { font-family: IBMPlexSans; src: url("https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Bold-875de5047556e7c822519d95d7ee692d.woff2") format("woff2"), url("https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Bold-c34ba754b7235b49d33b294ff7a54179.woff") format("woff"); font-style: normal; font-weight: 700; }
 
 h3 {
         text-align: left;
@@ -17,9 +18,216 @@ a:visited {
 	text-decoration: none;
 }
 
+#Heat {
+align-items: center;
+background-color: rgb(255, 255, 255);
+border-bottom-color: rgb(0, 0, 0);
+border-bottom-style: none;
+border-bottom-width: 0px;
+border-image-outset: 0;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(0, 0, 0);
+border-left-style: none;
+border-left-width: 0px;
+border-right-color: rgb(0, 0, 0);
+border-right-style: none;
+border-right-width: 0px;
+border-top-color: rgb(0, 0, 0);
+border-top-style: none;
+border-top-width: 0px;
+display: flex;
+flex-direction: row;
+font-family: IBMPlexSans, Arial, sans-serif;
+font-feature-settings: normal;
+font-kerning: auto;
+font-language-override: normal;
+font-optical-sizing: auto;
+font-size: 16px;
+font-size-adjust: none;
+font-stretch: 100%;
+font-style: normal;
+font-variant: normal;
+font-variant-alternates: normal;
+font-variant-caps: normal;
+font-variant-east-asian: normal;
+font-variant-ligatures: normal;
+font-variant-numeric: normal;
+font-variant-position: normal;
+font-variation-settings: normal;
+font-weight: 400;
+height: 46px;
+line-height: 16px;
+margin-bottom: 8px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+overflow: hidden;
+overflow-x: hidden;
+overflow-y: hidden;
+padding-bottom: 0px;
+padding-left: 16px;
+padding-right: 16px;
+padding-top: 0px;
+vertical-align: baseline;
+}
+
+._1z_GZgOeapyyCdKo34Eqir {
+border-bottom-color: rgb(124, 124, 124);
+border-bottom-style: none;
+border-bottom-width: 0px;
+border-image-outset: 0;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(124, 124, 124);
+border-left-style: none;
+border-left-width: 0px;
+border-right-color: rgb(124, 124, 124);
+border-right-style: none;
+border-right-width: 0px;
+border-top-color: rgb(124, 124, 124);
+border-top-style: none;
+border-top-width: 0px;
+color: rgb(124, 124, 124);
+fill: rgb(255, 255, 255);
+font-family: IBMPlexSans, Arial, sans-serif;
+font-feature-settings: normal;
+font-kerning: auto;
+font-language-override: normal;
+font-optical-sizing: auto;
+font-size: 12px;
+font-size-adjust: none;
+font-stretch: 100%;
+font-style: normal;
+font-variant: normal;
+font-variant-alternates: normal;
+font-variant-caps: normal;
+font-variant-east-asian: normal;
+font-variant-ligatures: normal;
+font-variant-numeric: normal;
+font-variant-position: normal;
+font-variation-settings: normal;
+font-weight: 400;
+line-height: 16px;
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 12px;
+padding-bottom: 0px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 0px;
+vertical-align: baseline;
+}
+
+._3j9XjJayuKq7dJ8huVnCuS {
+border-bottom-color: rgb(28, 28, 28);
+border-bottom-style: none;
+border-bottom-width: 0px;
+border-image-outset: 0;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(28, 28, 28);
+border-left-style: none;
+border-left-width: 0px;
+border-right-color: rgb(28, 28, 28);
+border-right-style: none;
+border-right-width: 0px;
+border-top-color: rgb(28, 28, 28);
+border-top-style: none;
+border-top-width: 0px;
+color: rgb(28, 28, 28);
+fill: rgb(255, 255, 255);
+font-family: IBMPlexSans, Arial, sans-serif;
+font-feature-settings: normal;
+font-kerning: auto;
+font-language-override: normal;
+font-optical-sizing: auto;
+font-size: 22px;
+font-size-adjust: none;
+font-stretch: 100%;
+font-style: normal;
+font-variant: normal;
+font-variant-alternates: normal;
+font-variant-caps: normal;
+font-variant-east-asian: normal;
+font-variant-ligatures: normal;
+font-variant-numeric: normal;
+font-variant-position: normal;
+font-variation-settings: normal;
+font-weight: 700;
+line-height: 22px;
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+padding-bottom: 0px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 0px;
+vertical-align: baseline;
+}
+
+._1VNcq3ynegRchfLyPqmKJ_ {
+border-bottom-color: rgb(28, 28, 28);
+border-bottom-style: none;
+border-bottom-width: 0px;
+border-image-outset: 0;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(28, 28, 28);
+border-left-style: none;
+border-left-width: 0px;
+border-right-color: rgb(28, 28, 28);
+border-right-style: none;
+border-right-width: 0px;
+border-top-color: rgb(28, 28, 28);
+border-top-style: none;
+border-top-width: 0px;
+color: rgb(28, 28, 28);
+fill: rgb(255, 255, 255);
+font-family: IBMPlexSans, Arial, sans-serif;
+font-feature-settings: normal;
+font-kerning: auto;
+font-language-override: normal;
+font-optical-sizing: auto;
+font-size: 18px;
+font-size-adjust: none;
+font-stretch: 100%;
+font-style: normal;
+font-variant: normal;
+font-variant-alternates: normal;
+font-variant-caps: normal;
+font-variant-east-asian: normal;
+font-variant-ligatures: normal;
+font-variant-numeric: normal;
+font-variant-position: normal;
+font-variation-settings: normal;
+font-weight: 500;
+line-height: 22px;
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+max-width: 100%;
+padding-bottom: 20px;
+padding-left: 20px;
+padding-right: 20px;
+padding-top: 16px;
+vertical-align: baseline;
+}
+
 #arrow {
 color: rgb(28, 28, 28);
-cursor: pointer;
+/*cursor: pointer;*/
 display: inline-block;
 fill: rgb(135, 138, 140);
 font-family: IBMPlexSans, Arial, sans-serif;
@@ -68,7 +276,7 @@ border-top-color: rgb(28, 28, 28);
 border-top-style: none;
 border-top-width: 0px;
 color: rgb(28, 28, 28);
-cursor: pointer;
+/*cursor: pointer;*/
 display: block;
 font-family: IBMPlexSans, Arial, sans-serif;
 font-feature-settings: normal;
@@ -121,7 +329,7 @@ border-top-color: rgb(135, 138, 140);
 border-top-style: none;
 border-top-width: 0px;
 color: rgb(135, 138, 140);
-cursor: pointer;
+/*cursor: pointer;*/
 font-family: IBMPlexSans, Arial, sans-serif;
 font-feature-settings: normal;
 font-kerning: auto;
@@ -307,7 +515,7 @@ padding-left: 0px;
 padding-right: 0px;
 padding-top: 0px;
 vertical-align: baseline;
-width: 640px;
+/*width: 640px;*/
 }
 
 #poposts {
