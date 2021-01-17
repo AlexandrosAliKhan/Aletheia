@@ -1,4 +1,5 @@
 from flask import Flask # Make sure you have Flask
+from flask import render_template
 import json
 import requests
 import tensorflow as tf # Make sure you have tensorflow
@@ -6,7 +7,7 @@ import numpy as np # Make sure you have numpy
 import praw # pip3 install praw
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer # make sure you have sklearn
-
+from flask import request
 
 app = Flask(__name__)
 
@@ -57,22 +58,56 @@ def MLInferences(ListOfHeadlines,Vectorizer):
       if Result >= 0.5:
         ReliabilityLabel.append("True")
       else:
-        ReliabilityLabel.append("False")
+        ReliabilityLabel.append("Fake")
     
     # Return labels for all the headlines(in the same order of the given headline list)
     return ReliabilityLabel
 
 
-def ConvertRawPythonTitlesToList(RedditObj,Subreddit="worldnews",Limit=30):
+def ConvertRawPythonTitlesToLists(RedditObj,Subreddit=None,cat="hot",Limit=30):
     """
     Input: Reddit praw object, name of the subreddit you want to examine, and the number of posts you want to save
     Output: A Python list of all the headlines from the subreddit you have passed in.
     """
     ResultList = []
-    for Headline in RedditObj.subreddit(Subreddit).hot(limit=Limit):
-        ResultList.append(Headline.title)
-  
-    return ResultList
+    linklist = []
+    if Subreddit is None:
+        if cat == "hot":
+            for Headline in RedditObj.front.hot(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
+        elif cat == "new":
+            for Headline in RedditObj.front.new(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
+        elif cat == "top":
+            for Headline in RedditObj.front.top(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
+        elif cat == "rising":
+            for Headline in RedditObj.front.rising(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
+    else:
+        if cat == "hot":
+            for Headline in RedditObj.subreddit(Subreddit).hot(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
+        elif cat == "new":
+            for Headline in RedditObj.subreddit(Subreddit).new(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
+        elif cat == "top":
+            for Headline in RedditObj.subreddit(Subreddit).top(limit=Limit):
+               ResultList.append(Headline.title)
+               linklist.append(Headline.url)
+            return ResultList, linklist
  
  
 def GetVectorizer():
@@ -82,7 +117,8 @@ def GetVectorizer():
  
  
 @app.route("/")
-def homepage():
+@app.route("/<cat>/")
+def homepage(cat="hot",q=None):
     # Read in creditentials from the JSON file
     with open('RedditCreds/RedditCreds.json') as JSONFile:
         RawJSON = json.load(JSONFile)
@@ -100,7 +136,10 @@ def homepage():
     
     
     # Get a python list of titles from the desired subreddit
-    RawHeadlines = ConvertRawPythonTitlesToList(RedditObj)
+    if q is None:
+        RawHeadlines, links = ConvertRawPythonTitlesToLists(RedditObj, cat=cat)
+    else:
+        RawHeadlines, links = ConvertRawPythonTitlesToLists(RedditObj, q, cat=cat)
     
     # Get a usable vectorizer to pass the inferencing/prediction stage
     Vectorizer = GetVectorizer()
@@ -108,17 +147,27 @@ def homepage():
     # Get the list of fake/real news classifcation for the headlines you pass in
     FakeRealLabels = MLInferences(RawHeadlines, Vectorizer)
     
+    '''
     # Prepare a temporary HTML document to give to client
     ResultHTML = "<div style='text-align:center';font-family:'arial'>\n"
     for HeadlineNum in range(len(RawHeadlines)):
         ResultHTML += "<h3>{} - {}</h3>\n".format(RawHeadlines[HeadlineNum],FakeRealLabels[HeadlineNum])
-       
+        
     ResultHTML += "</div>\n"
     
     return ResultHTML
+    '''
 
+    return render_template('index.html', rhels=RawHeadlines, pabels=FakeRealLabels, links=links, cat=cat, q=q)
+
+@app.route("/search/", methods=['GET', 'POST'])
+def search():
+	subreddit = request.args.get('q')
+	print(subreddit)
+	return homepage("hot",subreddit)
 
 
 if __name__ == "__main__":
     # When deploying -> change to production mode (python-anywhere)
     app.run(debug=True)
+
