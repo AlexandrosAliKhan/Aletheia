@@ -15,7 +15,7 @@ To Do List:
 
 - Use the templating engine to dynamically create good looking website (add Javascript,HTML,and CSS)
 - Make a form(look into how post requests are handled) -> allows user to specify which subreddit to check for fake news
-- Add any feature you like :) => Also add a Sentiment analysis icon/information about each post, pattern/keyword matching(filtering)
+- Add any feature you like :) => Also add a Sentiment analysis icon/information about each post, pattern/keyword matching(filtering), link to each post
 ! NOT RECOMMENDED -> User accounts -> you will need to do OAUTH authentication for each login (not fun unless PRAW makes it easy)
 ! Do not add keys to GitHub page
 - Deploy the website (Python-anywhere)
@@ -31,9 +31,10 @@ def MLInferences(ListOfHeadlines,Vectorizer):
     Output: A Python list of true/fake news labels for the headlines you have passed in (same order)
     """
     
- 
+    # Setu vectorizer
     ListOfHeadlines = Vectorizer.transform(ListOfHeadlines).toarray().tolist()
     
+    # Set up interperter
     interpreter = tf.lite.Interpreter(model_path="MainMode.tflite")
     interpreter.allocate_tensors()
 
@@ -41,7 +42,8 @@ def MLInferences(ListOfHeadlines,Vectorizer):
     output_details = interpreter.get_output_details()
 
     input_shape = input_details[0]['shape']
-
+    
+    # Repeatly call the interperator can give it single value to inference
     ReliabilityLabel = []
     for i in range(len(ListOfHeadlines)):
       input_data = np.array(ListOfHeadlines[i:i+1], dtype=np.float32)
@@ -50,12 +52,14 @@ def MLInferences(ListOfHeadlines,Vectorizer):
       interpreter.invoke()
       output_data = interpreter.get_tensor(output_details[0]['index'])
       Result = output_data[0][0]
-
+      
+      # Give inferences string labels
       if Result >= 0.5:
         ReliabilityLabel.append("True")
       else:
         ReliabilityLabel.append("False")
-
+    
+    # Return labels for all the headlines(in the same order of the given headline list)
     return ReliabilityLabel
 
 
